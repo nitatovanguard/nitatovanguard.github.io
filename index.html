@@ -7,14 +7,17 @@
 <h1>Test your click speed</h1>
 <h2 id="time"></h2>
 <p id="clicks"></p>
+<button type="Button" onclick="reset(event)">Reset</button>
 </body>
 <canvas id="myCanvas" width="2500" height="1250" style="border:5px solid #000000;" onclick="draw(event); startcount(event); countclicks(event)"></canvas>
 <script>
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
+const context = canvas.getContext('2d');
+
 
 ctx.canvas.width  = window.innerWidth - 25;
-ctx.canvas.height = window.innerHeight - 200;
+ctx.canvas.height = window.innerHeight - 225;
 
 initialize();
 
@@ -31,7 +34,7 @@ function draw(event) {
 }
 function resizeCanvas() {
     ctx.canvas.width = window.innerWidth - 25;
-    ctx.canvas.height = window.innerHeight - 200;
+    ctx.canvas.height = window.innerHeight - 225;
 }
 var seconds = 10;
 document.getElementById("time").innerHTML = seconds + "s";
@@ -45,10 +48,11 @@ function decrement(event){
         document.getElementById("time").innerHTML = seconds + "s";
     }
 }
+var interval
 var started = false
 function startcount(event){
     if (started == false) {
-        setInterval(decrement, 1000);
+        interval = setInterval(decrement, 1000);
         started = true;
     }
 }
@@ -57,6 +61,15 @@ function countclicks(event) {
         ++clicks;
         document.getElementById("clicks").innerHTML = clicks;
     }
+}
+function reset(event) {
+    clearInterval(interval);
+    seconds = 10;
+    clicks = 0;
+    started = false
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("time").innerHTML = seconds + "s";
+    document.getElementById("clicks").innerHTML = clicks;
 }
 </script>
 </html>
