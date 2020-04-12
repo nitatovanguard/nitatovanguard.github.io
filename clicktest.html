@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>cpstest</title>
+</head>
+<body>
+<h1>Test your click speed</h1>
+<h2 id="time"></h2>
+<p id="clicks"></p>
+</body>
+<canvas id="myCanvas" width="2500" height="1250" style="border:5px solid #000000;" onclick="draw(event); startcount(event); countclicks(event)"></canvas>
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+ctx.canvas.width  = window.innerWidth - 25;
+ctx.canvas.height = window.innerHeight - 200;
+
+initialize();
+
+function initialize() {
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
+}
+function draw(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    ctx.globalAlpha = 0.1;
+    ctx.fillStyle = 'rgb(255, 165, 0)';
+    ctx.fillRect(x-50, y-200, 75, 75);
+}
+function resizeCanvas() {
+    ctx.canvas.width = window.innerWidth - 25;
+    ctx.canvas.height = window.innerHeight - 200;
+}
+var seconds = 10;
+document.getElementById("time").innerHTML = seconds + "s";
+var clicks = 0;
+document.getElementById("clicks").innerHTML = clicks;
+function decrement(event){
+    --seconds;
+    if (seconds < 0) {
+        document.getElementById("time").innerHTML = "TIME UP: " + clicks/10 + "CPS";
+    } else{
+        document.getElementById("time").innerHTML = seconds + "s";
+    }
+}
+var started = false
+function startcount(event){
+    if (started == false) {
+        setInterval(decrement, 1000);
+        started = true;
+    }
+}
+function countclicks(event) {
+    if(seconds > 0){
+        ++clicks;
+        document.getElementById("clicks").innerHTML = clicks;
+    }
+}
+</script>
+</html>
