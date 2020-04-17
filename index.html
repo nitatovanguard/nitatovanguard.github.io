@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>cpstest</title>
-</head>
-<body>
-<h1>Test your click speed</h1>
-<h2 id="time"></h2>
-<p id="clicks"></p>
-<button type="Button" onclick="reset(event)">Reset</button>
-</body>
-<canvas id="myCanvas" width="2500" height="1250" style="border:5px solid #000000;" onclick="draw(event); startcount(event); countclicks(event)"></canvas>
-<script>
-var canvas = document.getElementById("myCanvas");
+<!doctypehtml><title>cpstest</title><h1>Test your click speed</h1><h2 id="time"></h2><p id="clicks"></p><button type="Button"onclick="reset(event)">Reset</button><canvas id="myCanvas"width="2500"height="1250"style="border:5px solid #000"onclick="draw(event),startcount(event),countclicks(event)"></canvas><script>var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 const context = canvas.getContext('2d');
 
@@ -70,6 +57,4 @@ function reset(event) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("time").innerHTML = seconds + "s";
     document.getElementById("clicks").innerHTML = clicks;
-}
-</script>
-</html>
+}</script>
